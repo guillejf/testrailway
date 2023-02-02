@@ -1,20 +1,26 @@
 const express = require("express");
 const app = express();
 
-const port = process.env.PORT || 3000;
+if (process.env.MODE != "production") {
+  require("dotenv").config();
+}
+
+const PORT = process.env.PORT;
+const MODE = process.env.MODE;
+const MONGO_URL = process.env.MONGO_URL;
 
 app.get("/", (req, res) => {
   res.json({
-    port: process.env.PORT,
-    MODE: process.env.MODE,
-    MONGO_URL: process.env.MONGO_URL,
+    PORT,
+    MODE,
+    MONGO_URL,
   });
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log({
-    port: process.env.PORT,
-    MODE: process.env.MODE,
-    MONGO_URL: process.env.MONGO_URL,
+    PORT,
+    MODE,
+    MONGO_URL,
   });
 });
